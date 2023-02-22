@@ -33,32 +33,3 @@ app.post("/todo/postTodo", (req, res) => {
 app.listen(port, () => {
   console.log(`app listening on port: ${port}`);
 });
-
-class Guitar {
-  constructor(color, stringNumber) {
-    this.color = color;
-    this.stringNumber = stringNumber;
-    this.play = () => console.log("guitar");
-  }
-}
-
-class Base extends Guitar {
-  constructor(color) {
-    super(color, 4);
-    this.play = () => console.log("Base");
-  }
-}
-class Electric extends Guitar {
-  constructor(color, stringNumber) {
-    super(color, 6);
-  }
-}
-
-Electric.prototype.play = () => console.log("elect");
-
-const guitars = [];
-guitars[0] = new Guitar("black");
-guitars[1] = new Base("green");
-guitars[3] = new Electric("red");
-
-guitars[3].play();
