@@ -4,6 +4,42 @@ const port = 4000;
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+const { MongoClient } = require("mongodb");
+
+const listDatabase = async (client) => {
+  const dataBaseList = await client.db().admin().listDatabases();
+
+  console.log("data base list", dataBaseList);
+};
+
+const createListing = async (client) => {
+  client.db.createCollection("node_todo", {
+    data: [
+      { title: "Home", text: "Take out trash", id: getRandom(20) },
+      { title: "Work", text: "Review meeting notes", id: getRandom(20) },
+    ],
+  });
+};
+
+const main = async () => {
+  const URI =
+    "mongodb+srv://jamal:Grywol77@nodetodo.iwg7lhz.mongodb.net/?retryWrites=true&w=majority";
+
+  const client = new MongoClient(URI);
+
+  try {
+    await client.connect();
+
+    await listDatabase(client);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    await client.close();
+  }
+};
+
+main().catch(console.error);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());

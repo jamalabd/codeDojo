@@ -10,7 +10,7 @@
 
 function printerError(s) {
   // we need our list of our colors
-  const goodColors = ["a", "b", "c", "d", "e", "f", "g", "a", "i", "k", "l", "m"];
+  const goodColors = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"];
   // turn string into an array of colors to compare
   let controlArray = s.split("");
   // create variables to represlent our rational
@@ -22,11 +22,8 @@ function printerError(s) {
       numerator++;
     }
   });
-  console.log(numerator);
-  // now that we have our numorator we can build our rational
-  const rational = `${numerator}/${denominator}`;
-
-  return rational;
+  // now that we have our numorator we can return our rational
+  return `${numerator}/${denominator}`;
 }
 
-console.log(printerError("aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbmmmmmmmmmmmmmmmmmmmxyz"));
+console.log(printerError("aaaaxxxxxxxxxxxwwwwwwwwwwwwwwwwttttttttttttpppppppppppammmxyz"));
