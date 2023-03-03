@@ -12,14 +12,9 @@ const listDatabase = async (client) => {
   console.log("data base list", dataBaseList);
 };
 
-const createListing = async (client) => {
-  client.db.createCollection("node_todo", {
-    data: [
-      { title: "Home", text: "Take out trash", id: getRandom(20) },
-      { title: "Work", text: "Review meeting notes", id: getRandom(20) },
-    ],
-  });
-};
+const createCollection = async (client) => client.db.createCollection("node_todo");
+
+const createlisting = async (client, newListing) => {};
 
 const main = async () => {
   const URI =
@@ -29,6 +24,8 @@ const main = async () => {
 
   try {
     await client.connect();
+
+    await createCollection(client);
 
     await listDatabase(client);
   } catch (error) {
