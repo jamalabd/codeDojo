@@ -30,7 +30,8 @@ const Todo = () => {
     const getTodo = async () => {
       const response = await fetch("http://localhost:4000/todo/getTodo");
       const data = await response.json();
-      setTodo(data.data);
+      setTodo(data);
+      console.log("data", data);
     };
 
     getTodo();

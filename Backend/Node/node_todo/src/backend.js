@@ -5,64 +5,55 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const { MongoClient } = require("mongodb");
-
-const listDatabase = async (client) => {
-  const dataBaseList = await client.db().admin().listDatabases();
-
-  console.log("data base list", dataBaseList);
-};
-
-const createCollection = async (client) => client.db.createCollection("node_todo");
-
-const createlisting = async (client, newListing) => {};
-
-const main = async () => {
-  const URI =
-    "mongodb+srv://jamal:Grywol77@nodetodo.iwg7lhz.mongodb.net/?retryWrites=true&w=majority";
-
-  const client = new MongoClient(URI);
-
-  try {
-    await client.connect();
-
-    await createCollection(client);
-
-    await listDatabase(client);
-  } catch (error) {
-    console.error(error);
-  } finally {
-    await client.close();
-  }
-};
-
-main().catch(console.error);
+const URI =
+  "mongodb+srv://jamal:Grywol77@nodetodo.iwg7lhz.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(URI);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const getRandom = (max) => Math.floor(Math.random() * max);
-
-let todolist = {
-  data: [
-    { title: "Home", text: "Take out trash", id: getRandom(20) },
-    { title: "Work", text: "Review meeting notes", id: getRandom(20) },
-  ],
-};
-
-app.get("/", (req, res) => {
-  res.send("Hello my guy");
-});
-
-app.get("/todo/getTodo", (req, res) => {
-  res.send(todolist);
-});
-
-app.post("/todo/postTodo", (req, res) => {
-  todolist.data = req.body;
-  console.log(req.body);
-});
-
 app.listen(port, () => {
   console.log(`app listening on port: ${port}`);
 });
+
+// const getTodos = async () => {
+
+// };
+
+const createMultipleTodos = () => {};
+
+// const createTodo = async () => {
+
+// };
+
+const main = async () => {
+  app.get("/", (req, res) => {
+    res.send("Hello my guy");
+  });
+
+  try {
+    await client.connect();
+
+    app.post("/todo/postTodo", (req, res) => {
+      console.log("req.body -----------", req.body);
+      client
+        .db("nodeTodos")
+        .collection("todos")
+        .insertOne(req.body)
+        .then((res) => res.status(201).json(res))
+        .catch((error) => res.status(500).json({ error: "could not add todo" }));
+    });
+
+    app.get("/todo/getTodo", async (req, res) => {
+      const todos = await client.db("nodeTodos").collection("todos").find().toArray();
+      res.send(todos);
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    // await client.close();
+  }
+};
+
+main().catch(console.error);
