@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>List View</title>
+        <link href="https://cdn.jsdelivr.net/npm/h8k-design@latest/dist/index.css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="https://cdn.jsdelivr.net/npm/h8k-design@latest/dist/assets/favicon.ico">
+        <script src="https://cdn.jsdelivr.net/npm/h8k-components/dist/h8k-components/h8k-components.esm.js"
+                type="module"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/h8k-components/dist/h8k-components/h8k-components.js"></script>
+      <style>
+
+        li:nth-child(3n){
+          color: red;
+        }
+      </style>
+    </head>
+
+    <body>
+        <h8k-navbar header="List View"></h8k-navbar>
+        <div class="layout-column mt-75">
+            <div
+                id="alert"
+                data-testid="alert"
+                class="alert error w-20 mx-auto"
+                style="display: none;"
+            >
+                Please provide the valid input
+            </div>
+            <div class="layout-row justify-content-center">
+                <input id="input" data-testid="input" type="text" class="large mr-6"/>
+                <button id="button" data-testid="button" class="small ma-0" style="font-size:14px">Insert</button>
+            </div>
+            <ul id="list" data-testid="list" class="styled mt-20 mx-auto pl-0"></ul>
+        </div>
+        <script>
+          const list = document.getElementById("list");
+          const input = document.getElementById("input");
+          const button = document.getElementById("button");
+          const alert = document.getElementById("alert");
+
+          button.addEventListener("click", ()=>{
+            const inputValue = input.value.trim();
+
+            if(inputValue === ""){
+              alert.style.display = 'block'
+            }else {
+              const newItem = document.createElement("li");
+              newItem.textContent = inputValue;
+              const listLength = list.children.length;
+              if(listLength % 3 === 0){
+                newItem.classList.add("red")
+              }
+
+              list.appendChild(newItem);
+              input.value = "";
+              alert.style.display = "none";
+            }
+          });
+        </script>
+        <!-- HMR and test infrastructure - DO NOT EDIT -->
+        <script src="bundle.js"></script>
+    </body>
+</html>
