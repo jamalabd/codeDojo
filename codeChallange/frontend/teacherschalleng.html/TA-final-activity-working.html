@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Click Event</title>
+    <link rel="stylesheet" type="text/css" href="./assets/style.css" />
+  </head>
+
+  <body>
+    <div class="container dark">
+      <div class="row spacer"></div>
+      <div class="row toggle">
+        <div class="col">
+          <p>DARK MODE</p>
+        </div>
+        <label class="switch col">
+          <input type="checkbox" id="theme-switcher" />
+          <span class="slider round"></span>
+        </label>
+        <div class="col">
+          <p>LIGHT MODE</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const themeSwitcher = document.querySelector("#theme-switcher");
+      const container = document.querySelector(".container");
+
+      let mode = "dark";
+
+      themeSwitcher.addEventListener("click", function() {
+        if (mode === "dark") {
+          mode = "light";
+          container.setAttribute("class","light");
+        }else if(mode === "light") {
+          mode = "dark";
+          container.setAttribute("class","dark");
+        }
+      });
+    </script>
+  </body>
+</html>
