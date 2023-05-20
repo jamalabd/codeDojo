@@ -5,7 +5,7 @@
 // and start removing with the next element.
 
 function removeEveryOther(arr) {
-  const filtered = arr.filter((item) => arr.indexOf(item) % 2 == 0);
+  return arr.filter((item, index) => index % 2 == 0);
 }
 
 console.log(removeEveryOther(["Hello", "Goodbye", "Hello Again"]));
