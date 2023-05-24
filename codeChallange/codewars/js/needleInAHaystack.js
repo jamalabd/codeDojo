@@ -10,9 +10,5 @@
 
 const haystack_1 = ["3", "123124234", undefined, "needle", "world", "hay", 2, "3", true, false];
 
-function findNeedle(haystack) {
-  const needle = haystack.find((hay, index) => (hay === "needles" ? index : null));
-  return `found the needle at position ${needle}`;
-}
-
+const findNeedle = (haystack) => `found the needle at position ${haystack.indexOf("needle")}`;
 console.log(findNeedle(haystack_1));
