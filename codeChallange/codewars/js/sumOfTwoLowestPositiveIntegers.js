@@ -4,22 +4,15 @@
 
 // [10, 343445353, 3453445, 3453545353453] should return 3453455.
 
-const sumTwoSmallestNumbers = (numbers) => {  
-  console.log(numbers)
-    // remove all negative numbers
-    numbers = numbers.filter((num)=> num >= 0);
-    console.log(numbers)
-    // get the first lowest number 
-    const firstLowest = Math.min(...numbers);
-    console.log(firstLowest)
-    // remove that number 
-    numbers = numbers.filter((num)=> num != firstLowest);
-    
-    // now get the second lowest 
-    const secondLowest = Math.min(...numbers);
-    console.log(secondLowest)
-    return firstLowest + secondLowest; 
+const sumTwoSmallestNumbers = (numbers) => {
+  // get the first lowest number
+  const firstLowest = Math.min(...numbers);
+  // remove that number
+  numbers.splice(numbers.indexOf(firstLowest), 1);
+  // now get the second lowest
+  const secondLowest = Math.min(...numbers);
+  // return the added values
+  return firstLowest + secondLowest;
+};
 
-  }
-
-console.log(sumTwoSmallestNumbers([10, 343445353, 3453445, 3453545353453]))
+console.log(sumTwoSmallestNumbers([10, 343445353, 3453445, 3453545353453]));
